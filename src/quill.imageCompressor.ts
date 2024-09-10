@@ -21,7 +21,7 @@ class imageCompressor {
     const ab = new ArrayBuffer(byteString.length);
     let ia = new Uint8Array(ab);
     for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
+      ia[i] = byteString.charCodeAt(i);
     }
     return new Blob([ab], { type: type });
   }
@@ -56,6 +56,7 @@ class imageCompressor {
     this.fileHolder = document.createElement("input");
     this.fileHolder.setAttribute("type", "file");
     this.fileHolder.setAttribute("accept", "image/*");
+    this.fileHolder.setAttribute("multiple", "true");
     this.fileHolder.setAttribute("style", "visibility:hidden");
 
     this.fileHolder.onchange = () => this.fileChanged().then(() => onFileChanged && onFileChanged());
@@ -74,16 +75,18 @@ class imageCompressor {
     if (!files || !files.length) {
       return;
     }
-    const file = files[0];
-    this.Logger.log("fileChanged", { file });
-    if (!file) {
-      return;
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      this.Logger.log("fileChanged", { file });
+      if (!file) {
+        continue;
+      }
+      const base64ImageSrc = await file2b64(file);
+      const base64ImageSmallSrc = await this.downscaleImageFromUrl(
+        base64ImageSrc
+      );
+      this.insertToEditor(base64ImageSmallSrc, imageCompressor.b64toBlob(base64ImageSmallSrc));
     }
-    const base64ImageSrc = await file2b64(file);
-    const base64ImageSmallSrc = await this.downscaleImageFromUrl(
-      base64ImageSrc
-    );
-    this.insertToEditor(base64ImageSmallSrc, imageCompressor.b64toBlob(base64ImageSmallSrc));
   }
 
   async downscaleImageFromUrl(dataUrl: string) {
@@ -105,7 +108,7 @@ class imageCompressor {
     if (this.options.insertIntoEditor) {
       this.options.insertIntoEditor(url, blob, this.quill);
     } else {
-      this.Logger.log('insertToEditor', {url});
+      this.Logger.log('insertToEditor', { url });
       this.range = this.quill.getSelection();
       const range = this.range;
       if (!range) {
