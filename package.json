@@ -1,7 +1,7 @@
 {
 	"name": "@carlos-lopezochoa/quill-image-compress",
 	"description": "A Quill rich text editor Module which compresses images uploaded to the editor (with multiple files support by @carlos-lopezochoa)",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"main": "dist/quill.imageCompressor.min.js",
 	"types": "types/index.d.ts",
 	"homepage": "https://github.com/carlos-lopezochoa/quill-image-compress/blob/master/src/demo.html",
@@ -36,8 +36,6 @@
 		"quill": "^2.0.2",
 		"ts-loader": "^9.5.1",
 		"typescript": "^5.5.3",
-		"webpack": "5.93.0",
-		"webpack-cli": "5.1.4",
-		"webpack-dev-server": "5.0.4"
+		"webpack": "^5.94.0"
 	}
 }
