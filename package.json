@@ -12,9 +12,6 @@
 	"author": "Carlos López-Ochoa Aledo <carlos.lopezochoa@inercya.com>",
 	"license": "MIT",
 	"scripts": {
-		"watch": "webpack --watch --progress --mode development",
-		"start": "webpack serve --mode development --hot",
-		"build-dev": "webpack --mode development",
 		"build": "webpack --mode production"
 	},
 	"files": [
