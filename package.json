@@ -12,7 +12,8 @@
 	"author": "Carlos López-Ochoa Aledo <carlos.lopezochoa@inercya.com>",
 	"license": "MIT",
 	"scripts": {
-		"build": "webpack --mode production"
+		"build": "webpack --mode production",
+		"publish": "npm publish --access public"
 	},
 	"files": [
 		"src/*.html",
